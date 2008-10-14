@@ -15,6 +15,7 @@ ActiveRecord::Schema.define :version => 0 do
     t.column :year_born, :integer
     t.column :annual_income, :float
     t.column :year_end_bonus, :float
+    t.column :retirement_contribution, :float
     t.column :created_at, :datetime
     t.column :updated_at, :datetime
   end
