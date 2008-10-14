@@ -1,28 +1,52 @@
-CommaParser
+Sexy Numerics
 ===========
 
-This plugin allows you to accept commas from users for integer fields in 
-an ActiveRecord model.
+This plugin allows you to accept commas, currency symbols, and percent
+symbols from users for integer and float fields in an ActiveRecord model.
+
+(This is a fork of Doug Ramsay's CommaParser, which I think is an elegant
+solution for commas, so I mod'd his code instead of writing it from 
+scratch.  Most of the work on this, so far, is his.
+http://github.com/dramsay/comma_parser/tree/master).
 
 
 Example
 =======
 
-# Table name: cities
-#
-#  id           :integer(11)     not null, primary key
-#  name         :string(50)
-#  population   :integer(11)
+create_table :cities do |t|
+  t.string  :name,          :limit => 20,                    :null => false
+  t.integer :population,                      :default => 0, :null => true
+  t.float   :annual_budget, :annual_expenses, :default => 0, :null => true
+  t.float   :percent_unemployed,              :default => 0, :null => true
+end
 
 class City < ActiveRecord::Base
-  allow_commas :population
-
+  allow_commas            :population
+  allow_currency_symbols  :annual_budget, :annual_expenses
+  allow_percent_symbols   :percent_unemployed
 
   # rest of class
 end
 
 Now the user can type population "1,000,000" into a form and it will still 
-save correctly as "1000000" instead of "1". This saves you the hassle of stripping 
-out commas either in JavaScript or in the controller.
+save correctly as "1000000" instead of "1". This saves you the hassle of 
+stripping out commas either in JavaScript or in the controller.
 
-Copyright (c) 2008 Doug Ramsay and Intridea, Inc., released under the MIT license
+
+Install
+=======
+
+ruby script/plugin install git://github.com/twerth/sexy_numerics.git
+
+
+Future
+=======
+
+My intention is to add other numeric Model based features, not just
+character removal.
+
+
+License
+=======
+
+Released under the MIT license

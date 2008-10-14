@@ -1,1 +1,1 @@
-require File.dirname(__FILE__) + '/lib/comma_parser'
+require File.dirname(__FILE__) + '/lib/sexy_numerics'

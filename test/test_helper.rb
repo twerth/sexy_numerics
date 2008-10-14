@@ -10,12 +10,12 @@ rescue LoadError
   require 'action_controller'
 end
 
-require File.dirname(__FILE__) + '/../lib/comma_parser'
+require File.dirname(__FILE__) + '/../lib/sexy_numerics'
 require File.dirname(__FILE__) + '/country'
 require File.dirname(__FILE__) + '/person'
 
 ActiveRecord::Base.logger = Logger.new(File.dirname(__FILE__) + '/debug.log')
 ActiveRecord::Base.configurations = YAML::load(IO.read(File.dirname(__FILE__) + '/database.yml'))
-ActiveRecord::Base.establish_connection(ENV['DB'] || 'mysql')
+ActiveRecord::Base.establish_connection(ENV['DB'] || 'sqlite3')
 
 load(File.dirname(__FILE__) + '/schema.rb')
