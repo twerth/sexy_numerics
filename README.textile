@@ -1,4 +1,4 @@
-h1 Sexy Numerics
+h1. Sexy Numerics
 
 This plugin allows you to accept commas, currency symbols, and percent
 symbols from users for integer and float fields in an ActiveRecord model.
@@ -8,7 +8,7 @@ solution for commas, so I mod'd his code instead of writing it from
 scratch. http://github.com/dramsay/comma_parser/tree/master).
 
 
-h2 Example
+h2. Example
 
 <pre><code>
 create_table :cities do |t|
@@ -39,7 +39,7 @@ class City < ActiveRecord::Base
 end
 </code></pre>
 
--or as an array-like object-
+or as an array-like object
 
 <pre><code>
 class City < ActiveRecord::Base
@@ -48,7 +48,7 @@ end
 </code></pre>
 
 
-h2 Install
+h2. Install
 
 For Rails 2.1 and above:
 <pre>
@@ -60,12 +60,12 @@ To upgrade:
 ruby script/plugin install git://github.com/twerth/sexy_numerics.git --force
 </pre>
 
-h2 Future
+h2. Future
 
 My intention is to add other numeric Model based features, not just
 character removal.
 
 
-h2 License
+h2. License
 
 Released under the MIT license
