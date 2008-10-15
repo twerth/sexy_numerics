@@ -39,14 +39,30 @@ class SexyNumericsTest < Test::Unit::TestCase
   def test_check_multiple_assignments
     @person.annual_income = "$50,000"
     @person.year_end_bonus = "$1,000"
+    @person.save
+    @person.reload
     assert_equal 50_000.0, @person.annual_income
     assert_equal 1_000.0, @person.year_end_bonus
   end
 
   def test_commas_are_not_parsed_without_allow_commas
-    @person.retirement_contribution = "50,000"
+    @person.year_born = "50,000"
     @person.save
     @person.reload
-    assert_equal 50.0, @person.retirement_contribution
+    assert_equal 50, @person.year_born
+  end
+
+  def test_percent_division_options
+    @country.percent_unemployement = "50%"
+    @country.save
+    @country.reload
+    # assert_equal 50.5, @country.percent_unemployement
+  end
+
+  def test_allow_characters_with_german_euros
+    @person.annual_income_in_germany = "€123.456.790"
+    @person.save
+    @person.reload
+    assert_equal 123_456_790, @person.annual_income_in_germany
   end
 end

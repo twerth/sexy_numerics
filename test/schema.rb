@@ -14,8 +14,9 @@ ActiveRecord::Schema.define :version => 0 do
     t.column :last_name, :string, :limit => 25
     t.column :year_born, :integer
     t.column :annual_income, :float
+    t.column :annual_income_in_germany, :float
     t.column :year_end_bonus, :float
-    t.column :retirement_contribution, :float
+    t.column :ira_contribution_percentage, :float
     t.column :created_at, :datetime
     t.column :updated_at, :datetime
   end
