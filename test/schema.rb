@@ -17,6 +17,8 @@ ActiveRecord::Schema.define :version => 0 do
     t.column :annual_income_in_germany, :float
     t.column :year_end_bonus, :float
     t.column :ira_contribution_percentage, :float
+    t.column :alive, :boolean
+    t.column :employed, :integer
     t.column :created_at, :datetime
     t.column :updated_at, :datetime
   end

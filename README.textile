@@ -1,14 +1,13 @@
 h1. Sexy Numerics
 
-This plugin allows you to accept commas, currency symbols, and percent
-symbols from users for integer and float fields in an ActiveRecord model.
+This plugin provides a variety of utilities for numeric columns in an ActiveRecord model.  
 
-(This is a fork of Doug Ramsay's CommaParser, which I think is an elegant
-solution for commas, so I mod'd his code instead of writing it from 
-scratch. http://github.com/dramsay/comma_parser/tree/master).
+It allows you to accept commas, currency symbols, and percent symbols from users for integer and float column.  You can also set a numeric column to act as a boolean, so that no matter what format the boolean is stored in the database, it is handled correctly.
+
+(This is a fork of Doug Ramsay's CommaParser, which I think is an elegant solution for commas, so I mod'd his code instead of writing it from scratch. http://github.com/dramsay/comma_parser/tree/master).  
 
 
-h2. Example
+h2. Examples
 
 <pre><code>
 create_table :cities do |t|
@@ -16,6 +15,7 @@ create_table :cities do |t|
   t.integer :population,                      :default => 0, :null => true
   t.float   :annual_budget, :annual_expenses, :default => 0, :null => true
   t.float   :percent_unemployed,              :default => 0, :null => true
+  t.tinyint :historic,                        :default => 0, :null => true
 end
 
 class City < ActiveRecord::Base
@@ -23,13 +23,13 @@ class City < ActiveRecord::Base
   allow_currency_symbols  :annual_budget, :annual_expenses
   allow_percent_symbols   :percent_unemployed
 
+  acts_as_boolean :historic
+
   # rest of class
 end
 </code></pre>
 
-Now the user can type population "1,000,000" into a form and it will still 
-save correctly as "1000000" instead of "1". This saves you the hassle of 
-stripping out commas either in JavaScript or in the controller.
+Now the user can type population "1,000,000" into a form and it will still save correctly as "1000000" instead of "1". This saves you the hassle of stripping out commas either in JavaScript or in the controller.
 
 You can also strip any arbitrary characters, like so:
 
@@ -47,6 +47,9 @@ class City < ActiveRecord::Base
 end
 </code></pre>
 
+Historic will work as a boolean, whether it is stored as a 1/0 or a -1/0 or a t/f.  your_city.historic and your_city.historic? will both return true or false appropriately.  The following are false, all else are true:
+0, nil, false, '', '0', 'f', 'false', 'n', 'no'
+
 
 h2. Install
 
@@ -60,10 +63,10 @@ To upgrade:
 ruby script/plugin install git://github.com/twerth/sexy_numerics.git --force
 </pre>
 
+
 h2. Future
 
-My intention is to add other numeric Model based features, not just
-character removal.
+My intention is to add other numeric Model based features.
 
 
 h2. License
