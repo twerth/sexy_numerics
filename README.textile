@@ -2,7 +2,7 @@ h1. Sexy Numerics
 
 This plugin provides a variety of utilities for numeric columns in an ActiveRecord model.  
 
-It allows you to accept commas, currency symbols, and percent symbols from users for integer and float column.  You can also set a numeric column to act as a boolean, so that no matter what format the boolean is stored in the database, it is handled correctly.
+It allows you to accept commas, currency symbols, and percent symbols from users for integer and float columns.  You can also set a numeric column to act as a boolean, so that no matter what format the boolean is stored in the database, it is handled correctly.
 
 (This is a fork of Doug Ramsay's CommaParser, which I think is an elegant solution for commas, so I mod'd his code instead of writing it from scratch. http://github.com/dramsay/comma_parser/tree/master).  
 
@@ -15,7 +15,7 @@ create_table :cities do |t|
   t.integer :population,                      :default => 0, :null => true
   t.float   :annual_budget, :annual_expenses, :default => 0, :null => true
   t.float   :percent_unemployed,              :default => 0, :null => true
-  t.tinyint :historic,                        :default => 0, :null => true
+  t.integer :historic,                        :default => 0, :null => true
 end
 
 class City < ActiveRecord::Base
@@ -47,7 +47,7 @@ class City < ActiveRecord::Base
 end
 </code></pre>
 
-Historic will work as a boolean, whether it is stored as a 1/0 or a -1/0 or a t/f.  your_city.historic and your_city.historic? will both return true or false appropriately.  The following are false, all else are true:
+Historic, which is set as acts_as_boolean, will work as a boolean, whether it is stored as 1/0 or -1/0 or t/f.  Both methods, historic and historic?, will return the same value; either true or false.  The following are false, all else are true:
 0, nil, false, '', '0', 'f', 'false', 'n', 'no'
 
 
