@@ -52,36 +52,6 @@ module SexyNumerics
       end
     end
 
-
-    # Treats a column as a boolean, whether it's a tinyint, integer, float, 
-    # string, etc.
-    #
-    # This is useful when you don't have control over how your booleans are 
-    # used by different applications.  For example: Microsoft Access stores 
-    # booleans as 0 and -1.  Normally -1 in a MySQL database, would be
-    # converted, by Rails, into a false, rather than true as it should be.
-    #
-    # Example of use:
-    # class Person < ActiveRecord::Base
-    #   acts_as_boolean :alive, :employee, :vendor, :foo
-    # 
-    # Then you can use either foo or foo? and it properly returns true or false.
-    #
-    # The following are false, all else are true:
-    #   0, nil, false, '', '0', 'f', 'false', 'n', 'no'
-    def acts_as_boolean(*args)
-      args.each do |arg|
-        class_eval(
-          %Q(
-            def #{arg}?
-              is_true?(#{arg}_before_type_cast)
-            end
-            alias :#{arg} :#{arg}?
-          )
-        )
-      end # need to test performance of before_type_cast compared to other methods
-    end
-
     private
       CURRENCY_CHARS = '¢$,'
       PERCENTAGE_CHARS = '%,'
@@ -98,21 +68,7 @@ module SexyNumerics
         end
       end
 
-  end
-
-  module InstanceMethods
-
-    protected
-      def is_true?(value)
-        falsies = [ 0, nil, false, '', '0', 'f', 'false', 'n', 'no' ]
-        !falsies.include?(value)
-      end
-  end
-
-end
+  end # ClassMethods
+end # SexyNumerics
  
-class ActiveRecord::Base
-  include SexyNumerics::InstanceMethods
-end
 ActiveRecord::Base.extend  SexyNumerics::ClassMethods
-

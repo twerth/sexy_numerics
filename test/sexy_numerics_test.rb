@@ -69,44 +69,4 @@ class SexyNumericsTest < Test::Unit::TestCase
     assert_equal 123_456_790, @person.annual_income_in_germany
   end
 
-  def test_is_true_for_false
-    assert !@person.is_true?(nil)
-    assert !@person.is_true?(false)
-    assert !@person.is_true?(0)
-    assert !@person.is_true?('f')
-    assert !@person.is_true?('false')
-    assert !@person.is_true?('n')
-    assert !@person.is_true?('no')
-  end
-
-  def test_is_true_for_true
-    assert @person.is_true?(1)
-    assert @person.is_true?(-1)
-    assert @person.is_true?(true)
-    assert @person.is_true?('t')
-    assert @person.is_true?('true')
-    assert @person.is_true?('yes')
-    assert @person.is_true?('y')
-    assert @person.is_true?('foo')
-    assert @person.is_true?(45.5)
-    assert @person.is_true?([1,2])
-  end
-
-  def test_acts_as_boolean
-    @person.alive = true
-    assert @person.alive?
-    assert @person.alive
-    assert_equal(true, @person.alive_before_type_cast)
-    
-    @person.alive = 0
-    assert !@person.alive?
-
-    @person.employed = -1
-    assert_equal(-1, @person.employed_before_type_cast)
-    assert @person.employed?
-
-    #!! need more testing on this
-  end
-    
-
 end

@@ -4,6 +4,4 @@ class Person < ActiveRecord::Base
 
   # allow_characters          :annual_income_in_germany, :characters => %w[. € | _]
   allow_characters          :annual_income_in_germany, :characters => '.€' 
-
-  acts_as_boolean           :alive, :employed
 end
