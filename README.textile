@@ -2,7 +2,7 @@ h1. Sexy Numerics
 
 This plugin provides a variety of utilities for numeric columns in an ActiveRecord model.  
 
-It allows you to accept commas, currency symbols, and percent symbols from users for integer and float columns.  You can also set a numeric column to act as a boolean, so that no matter what format the boolean is stored in the database, it is handled correctly.
+It allows you to accept commas, currency symbols, and percent symbols from users for integer and float columns.
 
 (This is a fork of Doug Ramsay's CommaParser, which I think is an elegant solution for commas, so I mod'd his code instead of writing it from scratch. http://github.com/dramsay/comma_parser/tree/master).  
 
@@ -22,8 +22,6 @@ class City < ActiveRecord::Base
   allow_commas            :population
   allow_currency_symbols  :annual_budget, :annual_expenses
   allow_percent_symbols   :percent_unemployed
-
-  acts_as_boolean :historic
 
   # rest of class
 end
@@ -46,9 +44,6 @@ class City < ActiveRecord::Base
   allow_characters :annual_budget, annual_expenses, :characters => %w[. € | _]
 end
 </code></pre>
-
-Historic, which is set as acts_as_boolean, will work as a boolean, whether it is stored as 1/0 or -1/0 or t/f.  Both methods, historic and historic?, will return the same value; either true or false.  The following are false, all else are true:
-0, nil, false, '', '0', 'f', 'false', 'n', 'no'
 
 
 h2. Install
